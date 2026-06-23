@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none">
+  <rect width="240" height="180" rx="16" fill="#f0fdf9"/>
+  <rect x="40" y="50" width="50" height="50" rx="10" fill="#ccfbf1"/>
+  <rect x="110" y="50" width="50" height="50" rx="10" fill="#99f6e4"/>
+  <rect x="180" y="50" width="20" height="50" rx="6" fill="#5eead4"/>
+  <path d="M55 130h130" stroke="#14b8a6" stroke-width="3" stroke-linecap="round"/>
+  <path d="M70 145h100" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round"/>
+  <text x="120" y="170" text-anchor="middle" fill="#0d9488" font-size="13" font-family="sans-serif">Healthy Habits</text>
+</svg>

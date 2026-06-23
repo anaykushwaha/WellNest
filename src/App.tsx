@@ -1,0 +1,10 @@
+import { WellnessProvider } from '@/hooks/useWellnessEntries';
+import { AppRouter } from '@/routes/AppRouter';
+
+export default function App() {
+  return (
+    <WellnessProvider>
+      <AppRouter />
+    </WellnessProvider>
+  );
+}

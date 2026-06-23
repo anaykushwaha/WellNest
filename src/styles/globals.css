@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-wellness-50: #f0fdf9;
+  --color-wellness-100: #ccfbf1;
+  --color-wellness-200: #99f6e4;
+  --color-wellness-300: #5eead4;
+  --color-wellness-400: #2dd4bf;
+  --color-wellness-500: #14b8a6;
+  --color-wellness-600: #0d9488;
+  --color-wellness-700: #0f766e;
+  --color-wellness-800: #115e59;
+  --color-wellness-900: #134e4a;
+
+  --color-calm-50: #eff6ff;
+  --color-calm-100: #dbeafe;
+  --color-calm-200: #bfdbfe;
+  --color-calm-300: #93c5fd;
+  --color-calm-400: #60a5fa;
+  --color-calm-500: #3b82f6;
+  --color-calm-600: #2563eb;
+  --color-calm-700: #1d4ed8;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-wellness-50 via-white to-calm-50 text-gray-800 antialiased;
+    min-height: 100vh;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/60;
+  }
+}
