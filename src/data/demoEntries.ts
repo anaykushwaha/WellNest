@@ -4,6 +4,7 @@ import type { WellnessEntry } from '@/types/wellness';
 export const demoEntries: WellnessEntry[] = [
   {
     id: 'demo-1',
+    createdAt: '2026-06-20T09:30:00.000Z',
     date: '2026-06-20',
     mood: 'good',
     stressLevel: 4,
@@ -15,6 +16,7 @@ export const demoEntries: WellnessEntry[] = [
   },
   {
     id: 'demo-2',
+    createdAt: '2026-06-19T18:15:00.000Z',
     date: '2026-06-19',
     mood: 'okay',
     stressLevel: 6,
@@ -26,6 +28,7 @@ export const demoEntries: WellnessEntry[] = [
   },
   {
     id: 'demo-3',
+    createdAt: '2026-06-18T07:45:00.000Z',
     date: '2026-06-18',
     mood: 'great',
     stressLevel: 2,

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppLayout } from '@/components/common/AppLayout';
 import Dashboard from '@/pages/Dashboard';
 import CheckIn from '@/pages/CheckIn';
@@ -13,7 +13,11 @@ export function AppRouter() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<Dashboard />} />
-          <Route path="check-in" element={<CheckIn />} />
+          <Route path="check-in">
+            <Route index element={<Navigate to="/check-in/new" replace />} />
+            <Route path="new" element={<CheckIn />} />
+            <Route path="edit/:id" element={<CheckIn />} />
+          </Route>
           <Route path="breathing" element={<Breathing />} />
           <Route path="history" element={<History />} />
           <Route path="resources" element={<Resources />} />

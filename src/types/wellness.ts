@@ -2,6 +2,9 @@ export type MoodType = 'great' | 'good' | 'okay' | 'low' | 'stressed';
 
 export interface WellnessEntry {
   id: string;
+  createdAt: string;
+  updatedAt?: string;
+  /** @deprecated Derived from createdAt — kept for backward compatibility */
   date: string;
   mood: MoodType;
   stressLevel: number;
@@ -37,3 +40,5 @@ export interface FormErrors {
   waterCups?: string;
   exerciseMinutes?: string;
 }
+
+export type CheckInMode = 'new' | 'edit';

@@ -3,6 +3,7 @@ import { HistoryItem } from './HistoryItem';
 import { HistoryFilters, type SortOption } from './HistoryFilters';
 import { EmptyState } from '@/components/common/EmptyState';
 import { History } from 'lucide-react';
+import { getEntryTimestamp } from '@/lib/dateUtils';
 import type { WellnessEntry } from '@/types/wellness';
 
 interface HistoryListProps {
@@ -23,13 +24,13 @@ export function HistoryList({ entries, onDelete }: HistoryListProps) {
         (e) =>
           e.notes.toLowerCase().includes(query) ||
           e.mood.toLowerCase().includes(query) ||
-          e.date.includes(query),
+          e.createdAt.toLowerCase().includes(query),
       );
     }
 
     switch (sort) {
       case 'date-asc':
-        result.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        result.sort((a, b) => getEntryTimestamp(a) - getEntryTimestamp(b));
         break;
       case 'score-desc':
         result.sort((a, b) => b.score - a.score);
@@ -38,7 +39,7 @@ export function HistoryList({ entries, onDelete }: HistoryListProps) {
         result.sort((a, b) => a.score - b.score);
         break;
       default:
-        result.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        result.sort((a, b) => getEntryTimestamp(b) - getEntryTimestamp(a));
     }
 
     return result;
@@ -51,7 +52,7 @@ export function HistoryList({ entries, onDelete }: HistoryListProps) {
         title="No History Yet"
         description="Your wellness check-ins will appear here once you start tracking."
         actionLabel="Start Check-In"
-        onAction={() => (window.location.href = '/check-in')}
+        onAction={() => (window.location.href = '/check-in/new')}
       />
     );
   }

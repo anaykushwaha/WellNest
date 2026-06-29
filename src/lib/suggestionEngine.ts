@@ -19,7 +19,7 @@ export function generateSuggestions(entry: WellnessEntry | null): WellnessSugges
           'Complete your first daily check-in to receive personalized wellness suggestions.',
         priority: 'medium',
         action: 'Check In Now',
-        actionPath: '/check-in',
+        actionPath: '/check-in/new',
       },
     ];
   }

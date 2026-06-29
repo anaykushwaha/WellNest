@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 import { Card } from '@/components/common/Card';
 import { MOOD_VALUES } from '@/lib/constants';
-import { formatShortDate } from '@/lib/dateUtils';
+import { formatShortDateFromIso, getEntryTimestamp } from '@/lib/dateUtils';
 import type { WellnessEntry } from '@/types/wellness';
 import type { MoodTrendPoint } from '@/types/chart';
 
@@ -19,11 +19,11 @@ interface MoodTrendChartProps {
 
 function buildTrendData(entries: WellnessEntry[]): MoodTrendPoint[] {
   return [...entries]
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort((a, b) => getEntryTimestamp(a) - getEntryTimestamp(b))
     .slice(-7)
     .map((entry) => ({
-      date: entry.date,
-      label: formatShortDate(entry.date),
+      date: entry.createdAt,
+      label: formatShortDateFromIso(entry.createdAt),
       moodValue: MOOD_VALUES[entry.mood] ?? 3,
       mood: entry.mood,
     }));
@@ -43,7 +43,9 @@ export function MoodTrendChart({ entries }: MoodTrendChartProps) {
 
   return (
     <Card>
-      <h3 className="mb-4 text-sm font-semibold text-gray-900">Mood Trend (Last 7 Days)</h3>
+      <h3 className="mb-4 text-sm font-semibold text-gray-900">
+        Mood Trend (Recent Check-Ins)
+      </h3>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>

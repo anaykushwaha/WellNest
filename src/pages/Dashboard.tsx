@@ -13,7 +13,7 @@ import { SuggestionPanel } from '@/components/dashboard/SuggestionPanel';
 import { useWellnessEntries } from '@/hooks/useWellnessEntries';
 
 export default function Dashboard() {
-  const { entries, todayEntry, latestEntry, hasEntries } = useWellnessEntries();
+  const { entries, latestEntry, hasEntries } = useWellnessEntries();
   const location = useLocation();
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -30,14 +30,14 @@ export default function Dashboard() {
       <div>
         <PageHeader
           title="Dashboard"
-          description="Your wellness overview at a glance."
+          description="Your latest wellness overview."
         />
         <EmptyState
           icon={Sparkles}
           title="Welcome to WellNest!"
-          description="Start your wellness journey by completing your first daily check-in. Track mood, sleep, hydration, and more."
+          description="Start your wellness journey by completing your first check-in. Track mood, sleep, hydration, and more."
           actionLabel="Create First Check-In"
-          onAction={() => (window.location.href = '/check-in')}
+          onAction={() => (window.location.href = '/check-in/new')}
         />
       </div>
     );
@@ -47,12 +47,12 @@ export default function Dashboard() {
     <div>
       <PageHeader
         title="Dashboard"
-        description="Your wellness overview at a glance."
+        description="Your latest wellness overview."
         action={
-          <Link to="/check-in">
+          <Link to="/check-in/new">
             <Button variant="secondary">
               <ClipboardCheck className="h-4 w-4" />
-              {todayEntry ? 'Update Check-In' : 'Daily Check-In'}
+              New Check-In
             </Button>
           </Link>
         }
@@ -65,20 +65,20 @@ export default function Dashboard() {
       )}
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <WellnessScoreCard entry={todayEntry ?? latestEntry} />
+        <WellnessScoreCard entry={latestEntry} />
         <div className="lg:col-span-2">
           <MoodTrendChart entries={entries} />
         </div>
       </div>
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <SleepSummaryCard entries={entries} latestEntry={todayEntry ?? latestEntry} />
-        <HydrationProgress entry={todayEntry ?? latestEntry} />
-        <ExerciseSummary entry={todayEntry ?? latestEntry} entries={entries} />
+        <SleepSummaryCard entries={entries} latestEntry={latestEntry} />
+        <HydrationProgress entry={latestEntry} />
+        <ExerciseSummary entry={latestEntry} entries={entries} />
       </div>
 
       <div className="mt-6">
-        <SuggestionPanel entry={todayEntry ?? latestEntry} />
+        <SuggestionPanel entry={latestEntry} />
       </div>
     </div>
   );

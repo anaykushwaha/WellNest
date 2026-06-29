@@ -4,6 +4,7 @@ import type { WellnessEntry } from '../src/types/wellness';
 
 const baseEntry: WellnessEntry = {
   id: 'test-1',
+  createdAt: '2026-06-22T10:00:00.000Z',
   date: '2026-06-22',
   mood: 'good',
   stressLevel: 3,
@@ -19,7 +20,7 @@ describe('suggestionEngine', () => {
     const suggestions = generateSuggestions(null);
     expect(suggestions).toHaveLength(1);
     expect(suggestions[0].id).toBe('no-data');
-    expect(suggestions[0].actionPath).toBe('/check-in');
+    expect(suggestions[0].actionPath).toBe('/check-in/new');
   });
 
   it('suggests improving sleep when below 6 hours', () => {

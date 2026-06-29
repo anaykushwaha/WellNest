@@ -1,11 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { BREATHING_PHASES } from '@/lib/constants';
+import type { BreathingModeId } from '@/lib/constants';
+import { BREATHING_MODES } from '@/lib/constants';
 
 export type BreathingPhase = 'inhale' | 'hold' | 'exhale' | 'idle';
 
 const PHASE_ORDER: BreathingPhase[] = ['inhale', 'hold', 'exhale'];
 
-export function useBreathingTimer() {
+export function useBreathingTimer(modeId: BreathingModeId) {
+  const phases = BREATHING_MODES[modeId].phases;
+
   const [phase, setPhase] = useState<BreathingPhase>('idle');
   const [isRunning, setIsRunning] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
@@ -13,10 +16,13 @@ export function useBreathingTimer() {
   const phaseIndexRef = useRef(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const getPhaseDuration = useCallback((p: BreathingPhase): number => {
-    if (p === 'idle') return 0;
-    return BREATHING_PHASES[p];
-  }, []);
+  const getPhaseDuration = useCallback(
+    (p: BreathingPhase): number => {
+      if (p === 'idle') return 0;
+      return phases[p];
+    },
+    [phases],
+  );
 
   const clearTimer = useCallback(() => {
     if (intervalRef.current) {
@@ -40,10 +46,10 @@ export function useBreathingTimer() {
     if (phase === 'idle') {
       phaseIndexRef.current = 0;
       setPhase('inhale');
-      setSecondsLeft(BREATHING_PHASES.inhale);
+      setSecondsLeft(phases.inhale);
     }
     setIsRunning(true);
-  }, [phase]);
+  }, [phase, phases.inhale]);
 
   const pause = useCallback(() => {
     setIsRunning(false);
@@ -60,13 +66,19 @@ export function useBreathingTimer() {
   }, [clearTimer]);
 
   useEffect(() => {
+    reset();
+  }, [modeId, reset]);
+
+  useEffect(() => {
     if (!isRunning || phase === 'idle') return;
 
     intervalRef.current = setInterval(() => {
       setSecondsLeft((prev) => {
         if (prev <= 1) {
           advancePhase();
-          return getPhaseDuration(PHASE_ORDER[(phaseIndexRef.current) % PHASE_ORDER.length]);
+          return getPhaseDuration(
+            PHASE_ORDER[phaseIndexRef.current % PHASE_ORDER.length],
+          );
         }
         return prev - 1;
       });
@@ -86,6 +98,7 @@ export function useBreathingTimer() {
     cycleCount,
     progress,
     phaseDuration,
+    phases,
     start,
     pause,
     reset,

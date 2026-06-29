@@ -32,7 +32,7 @@ export function WellnessScoreCard({ entry }: WellnessScoreCardProps) {
     <Card className="col-span-full lg:col-span-1">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-500">Today&apos;s Wellness Score</p>
+          <p className="text-sm font-medium text-gray-500">Latest Wellness Score</p>
           <p className={`mt-2 text-5xl font-bold ${colorClass}`}>{score}</p>
           <Badge variant="success" className="mt-2">
             {label}
