@@ -33,7 +33,7 @@ The goal isn't just productivity—it's building a healthier lifestyle.
 
 Watch the project demonstration here:
 
-**Demo Video:**: https://youtu.be/-Ip0qR5mdVo 
+**Demo Video:**: https://www.youtube.com/watch?v=-Ip0qR5mdVo  
 
 
 ## 💡 Inspiration
